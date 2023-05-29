@@ -19,7 +19,7 @@ public class GameController : ControllerBase
         this.Logger = logger;
     }
 
-    [HttpGet(Name = "GetAll")]
+    [HttpGet(Name = "GetAllGames")]
     public async Task<IActionResult> Get()
     {
         var response = await this.GameService.GetAllAsync();

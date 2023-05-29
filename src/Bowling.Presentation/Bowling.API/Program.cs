@@ -15,6 +15,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGameService, GameService>();
 
+builder.Services.AddScoped<IFrameRepository, FrameRepository>();
+builder.Services.AddScoped<IFrameService, FrameService>();
+
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

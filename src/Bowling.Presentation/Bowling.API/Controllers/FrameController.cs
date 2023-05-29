@@ -19,7 +19,7 @@ public class FrameController : ControllerBase
         this.Logger = logger;
     }
 
-    [HttpGet(Name = "GetAll")]
+    [HttpGet(Name = "GetAllFrames")]
     public async Task<IActionResult> Get()
     {
         var response = await this.FrameService.GetAllAsync();
@@ -34,7 +34,7 @@ public class FrameController : ControllerBase
         var response = await this.FrameService.GetFrameAsync(id);
 
         return response.Match<IActionResult>(
-            game => Ok(game),
+            frame => Ok(frame),
             error => NotFound(error));
         
     }
