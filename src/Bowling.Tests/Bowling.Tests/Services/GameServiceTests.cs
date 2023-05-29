@@ -32,9 +32,9 @@ public class GameServiceTests
         .Returns(game);
 
         //Act
-        var response = await this.Sut.CreateGameAsync(game);
+        var result = await this.Sut.CreateGameAsync(game);
 
         //Assert
-        response.Should().Be(game);
+        result.Should().Be(game);
     }
 }

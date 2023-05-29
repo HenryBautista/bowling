@@ -1,5 +1,5 @@
+using Bowling.App.Services;
 using Bowling.Entities;
-using Bowling.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bowling.API.Controllers;
@@ -29,19 +29,20 @@ public class GameController : ControllerBase
     [HttpGet("{id}", Name = "GetGame")]
     public async Task<IActionResult> GetGame(int id)
     {
-        var response = await this.GameService.GetGame(id);
+        var response = await this.GameService.GetGameAsync(id);
         return Ok(response);
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> Post(Game game)
+    public async Task<IActionResult> Post([FromBody]Game game)
     {
-        var response = await this.GameService.CreateGameAsync(game);
-        return CreatedAtAction(
-            nameof(GetGame),
-            new { id = response.Id},
-            response
-        );
+        var result = await this.GameService.CreateGameAsync(game);
+
+        return result.Match<IActionResult>(
+            game => CreatedAtAction(nameof(GetGame),
+                new { id = game.Id},
+                game),
+            error => BadRequest(error));
     }
 }

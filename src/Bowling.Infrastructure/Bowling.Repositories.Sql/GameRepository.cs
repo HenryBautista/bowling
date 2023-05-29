@@ -23,7 +23,7 @@ public class GameRepository : IGameRepository
         return game;
     }
 
-    public Task DeleteAsync(Game entity)
+    public Task DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }

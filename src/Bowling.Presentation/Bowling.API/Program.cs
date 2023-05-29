@@ -1,7 +1,6 @@
 using Bowling.App.Services;
 using Bowling.Interfaces;
 using Bowling.Repositories.Sql;
-using Bowling.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
