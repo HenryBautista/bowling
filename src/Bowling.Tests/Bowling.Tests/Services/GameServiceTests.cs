@@ -23,7 +23,7 @@ public class GameServiceTests
     }
 
     [Fact]
-    public async Task Create_Game_ShouldBeSuccess()
+    public async Task CreateGameAsync_NewGame_ShouldBeSuccess()
     {
         // Arrange
         var game = this.Fixture.Create<Game>();
@@ -31,10 +31,14 @@ public class GameServiceTests
             this.FakeGameRepository.AddAsync(game))
         .Returns(game);
 
-        //Act
+        // Act
         var result = await this.Sut.CreateGameAsync(game);
 
-        //Assert
+        // Assert
+
+        A.CallTo(() => this.FakeGameRepository.AddAsync(A<Game>._))
+            .MustHaveHappenedOnceExactly();
+
         result.Should().Be(game);
     }
 }
