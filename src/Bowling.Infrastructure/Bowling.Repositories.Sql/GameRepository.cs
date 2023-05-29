@@ -33,9 +33,9 @@ public class GameRepository : IGameRepository
         return await this.BowlingDbContext.Games.ToListAsync();
     }
 
-    public Task<Game> GetByIdAsync(int id)
+    public async Task<Game?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await this.BowlingDbContext.Games.FindAsync(id);
     }
 
     public Task UpdateAsync(Game entity)

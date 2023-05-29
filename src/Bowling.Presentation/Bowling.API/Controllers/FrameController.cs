@@ -27,21 +27,41 @@ public class FrameController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetFrame")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetFrame(int id)
     {
         var response = await this.FrameService.GetFrameAsync(id);
-        return Ok(response);
+
+        return response.Match<IActionResult>(
+            game => Ok(game),
+            error => NotFound(error));
+        
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(Frame frame)
     {
         var result = await this.FrameService.CreateFrameAsync(frame);
+        
         return result.Match<IActionResult>(
             frame => CreatedAtAction(nameof(GetFrame),
                 new { id = frame.Id},
                 frame),
             error => BadRequest(error));
     }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchFrame(
+        [FromRoute] int id,
+        [FromBody] Frame frame)
+    {
+        var result = await this.FrameService.UpdateFrameAsync(frame);
+
+        return result.Match<IActionResult>( 
+            frame => Ok(result),
+            error => BadRequest(error));
+    }   
 }

@@ -27,14 +27,20 @@ public class GameController : ControllerBase
     }
 
     [HttpGet("{id}", Name = "GetGame")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetGame(int id)
     {
-        var response = await this.GameService.GetGameAsync(id);
-        return Ok(response);
+        var result = await this.GameService.GetGameAsync(id);
+
+        return result.Match<IActionResult>(
+            game => Ok(game),
+            error => NotFound(error));
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post([FromBody]Game game)
     {
         var result = await this.GameService.CreateGameAsync(game);
@@ -45,4 +51,5 @@ public class GameController : ControllerBase
                 game),
             error => BadRequest(error));
     }
+
 }

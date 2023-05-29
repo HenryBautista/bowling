@@ -1,10 +1,12 @@
-namespace Bowling.Entities
+namespace Bowling.Entities;
+
+using System.ComponentModel.DataAnnotations;
+public class Frame
 {
-    public class Frame
-    {
-        public int Id { get; set; }
-        public int FirstShoot { get; set; }
-        public int SecondShoot { get; set; }
-        public int Score { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+    public int FirstRoll { get; set; }
+    public int SecondRoll { get; set; }
+    public int Score { get; set; }
+    public int GameId { get; set; }
 }
