@@ -29,7 +29,7 @@ public class GameController : ControllerBase
     [HttpGet("{id}", Name = "GetGame")]
     public async Task<IActionResult> GetGame(int id)
     {
-        var response = await this.GameService.GetAllAsync();
+        var response = await this.GameService.GetGame(id);
         return Ok(response);
     }
 
