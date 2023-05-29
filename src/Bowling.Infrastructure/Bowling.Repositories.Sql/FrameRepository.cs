@@ -38,6 +38,12 @@ public class FrameRepository : IFrameRepository
         return await this.BowlingDbContext.Frames.FindAsync(id);
     }
 
+    public async Task<Frame?> GetFrameByGameAndNumberAsync(int gameId, int number)
+    {
+        return await this.BowlingDbContext.Frames.Where(frame => 
+            frame.GameId == gameId && frame.FrameNumber == number).FirstOrDefaultAsync();
+    }
+
     public async Task UpdateAsync(Frame entity)
     {
         var frame = await this.BowlingDbContext.Frames.FindAsync(entity.Id);
@@ -47,8 +53,8 @@ public class FrameRepository : IFrameRepository
             throw new Exception("Not found");
         }
 
-        frame.FirstRoll = entity.FirstRoll;
-        frame.SecondRoll = entity.SecondRoll;
+        frame.FrameNumber = entity.FrameNumber;
+        frame.IsFilled = entity.IsFilled;
         frame.Score = entity.Score;
 
         await this.BowlingDbContext.SaveChangesAsync();

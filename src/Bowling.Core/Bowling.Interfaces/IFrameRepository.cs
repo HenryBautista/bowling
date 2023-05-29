@@ -4,5 +4,7 @@ using Bowling.Entities;
 
 public interface IFrameRepository : IRepository<Frame>
 {
-    
+    Task<Frame?> GetFrameByGameAndNumberAsync(
+        int gameId,
+        int number);
 }

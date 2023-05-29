@@ -31,7 +31,7 @@ public class GameController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetGame(int id)
     {
-        var result = await this.GameService.GetGameAsync(id);
+        var result = await this.GameService.GetGameResultAsync(id);
 
         return result.Match<IActionResult>(
             game => Ok(game),

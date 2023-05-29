@@ -9,5 +9,5 @@ public class Game
     public int CurrentFrame { get; set; }
     public IList<Frame> Frames { get; set; } = new List<Frame>();
     public Player Player { get; set; } = new Player();
-    
+    public bool IsGameFinished { get; set; } = false;
 }
