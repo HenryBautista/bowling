@@ -1,19 +1,24 @@
 namespace Bowling.Tests.Services;
 
 using AutoFixture;
+using Bowling.Entities;
+using Bowling.Interfaces;
+using Bowling.App.Services;
 using FakeItEasy;
 using FluentAssertions;
 
 public class GameServiceTests
 {
-    private readonly IGameRepository fakeGameRepository;
-    private readonly IGameService sut;
-    private readonly Fixture fixture;
+    private readonly IGameRepository FakeGameRepository;
+    private readonly GameService Sut;
+    private readonly Fixture Fixture;
 
     public GameServiceTests()
     {
-        fakeGameRepository = A.Fake<IGameRepository>();
-        fixture = new Fixture();
+        this.FakeGameRepository = A.Fake<IGameRepository>();
+        this.Sut = new GameService(this.FakeGameRepository);
+
+        this.Fixture = new Fixture();
         
     }
 
@@ -21,13 +26,13 @@ public class GameServiceTests
     public async Task Create_Game_ShouldBeSuccess()
     {
         // Arrange
-        var game = fixture.Create<Game>();
+        var game = this.Fixture.Create<Game>();
         A.CallTo(() => 
-            fakeGameRepository.AddAsync())
+            this.FakeGameRepository.AddAsync(game))
         .Returns(game);
 
         //Act
-        var response = await sut.CreateGameAsync(game);
+        var response = await this.Sut.CreateGameAsync(game);
 
         //Assert
         response.Should().Be(game);

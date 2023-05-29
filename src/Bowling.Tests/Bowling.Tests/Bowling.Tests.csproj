@@ -24,4 +24,10 @@
     <PackageReference Include="FluentAssertions" Version="6.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bowling.Core\Bowling.Interfaces\Bowling.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Bowling.App\Bowling.App.Services\Bowling.App.Services.csproj" />
+    <ProjectReference Include="..\..\Bowling.Core\Bowling.Entities\Bowling.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
