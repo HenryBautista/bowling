@@ -3,6 +3,7 @@
 using System.Threading.Tasks;
 using Bowling.Entities;
 using Bowling.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 public class GameRepository : IGameRepository
 {
@@ -27,9 +28,9 @@ public class GameRepository : IGameRepository
         throw new NotImplementedException();
     }
 
-    public Task<Game> GetAllAsync()
+    public async Task<IReadOnlyList<Game>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await this.BowlingDbContext.Games.ToListAsync();
     }
 
     public Task<Game> GetByIdAsync(int id)

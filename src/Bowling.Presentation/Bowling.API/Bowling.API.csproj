@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bowling.Infrastructure\Bowling.Repositories.Sql\Bowling.Repositories.Sql.csproj" />
+    <ProjectReference Include="..\..\Bowling.Core\Bowling.Services\Bowling.Services.csproj" />
+    <ProjectReference Include="..\..\Bowling.App\Bowling.App.Services\Bowling.App.Services.csproj" />
   </ItemGroup>
 
 </Project>
