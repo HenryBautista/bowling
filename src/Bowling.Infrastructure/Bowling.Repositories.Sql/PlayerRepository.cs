@@ -3,7 +3,6 @@
 using System.Threading.Tasks;
 using Bowling.Entities;
 using Bowling.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 public class PlayerRepository : IPlayerRepository
 {

@@ -16,9 +16,14 @@ public class BowlingManagerService : IBowlingManagerService
         this.GameService = gameService;
     }
 
-    public Task<object> GetScore(int gameId)
+    public async Task<ScoreDto> GetScore(int gameId)
     {
-        throw new NotImplementedException();
+        //Get Game
+        var game = await this.GameService.GetGameAsync(gameId);
+
+        // TO-Do call to a Score Service, Send the GameId
+
+        return new ScoreDto();
     }
 
     public async Task<RollResultDto> Roll(RollDto roll)

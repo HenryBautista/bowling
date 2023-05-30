@@ -34,4 +34,20 @@ public class BowlingManagerController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpGet("score/{gameId}")]
+    [ProducesResponseType(typeof(RollResultDto), 200)]
+    [ProducesResponseType(typeof(string), 400)]
+    public async Task<IActionResult> GetScore([FromRoute] int gameId)
+    {
+        try
+        {
+            var result = await this.BowlingManagerService.GetScore(gameId);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }
