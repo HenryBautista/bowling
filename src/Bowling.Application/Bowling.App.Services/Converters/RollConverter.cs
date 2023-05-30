@@ -33,9 +33,9 @@ public class RollConverter
         else
         {
             // Spare Case
-            if (roll == '/' && frame.Rolls.Count > 0)
+            if (roll == '/' && frame.FirstRoll != null)
             {
-                return BowlingConstants.MAX_FRAME_ROLL_VALUE - frame.Rolls[0]; 
+                return BowlingConstants.MAX_FRAME_ROLL_VALUE - frame.FirstRoll.Value; 
             }
 
             throw new ArgumentException($"Invalid roll value: {roll}");

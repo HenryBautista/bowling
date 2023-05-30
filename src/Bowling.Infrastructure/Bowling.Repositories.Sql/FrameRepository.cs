@@ -64,7 +64,9 @@ public class FrameRepository : IFrameRepository
         frame.FrameNumber = entity.FrameNumber;
         frame.IsFilled = entity.IsFilled;
         frame.Score = entity.Score;
-
+        frame.FirstRoll = entity.FirstRoll;
+        frame.SecondRoll = entity.SecondRoll;
+        
         await this.BowlingDbContext.SaveChangesAsync();
     }
 }

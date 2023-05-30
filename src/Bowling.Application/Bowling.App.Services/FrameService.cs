@@ -94,25 +94,24 @@ public class FrameService : IFrameService
 
     private void SavePointsIntoFrame(Frame frame, int points)
     {
-        var currentRoll = frame.Rolls.Count();
-
         if (frame.IsFilled)
         {
             return;
         }
 
-        if(currentRoll == 0)
+        if(frame.FirstRoll == null)
         {
-            frame.Rolls.Add(points);
+            frame.FirstRoll = points;
             if (points == BowlingConstants.MAX_FRAME_ROLL_VALUE)
             {
                 // This is a Strike
+                frame.SecondRoll = BowlingConstants.MIN_FRAME_ROLL_VALUE;
                 frame.IsFilled = true;
             }
         } 
-        else if (currentRoll == 1)
+        else if (frame.SecondRoll == null)
         {
-            var previousRoll = frame.Rolls.First();
+            var previousRoll = frame.FirstRoll;
             var totalFrame = points + previousRoll;
 
             if (totalFrame >  BowlingConstants.MAX_FRAME_ROLL_VALUE)
@@ -120,7 +119,7 @@ public class FrameService : IFrameService
                 throw new ValidationException("Invalid Points, are greater than 10!");
             }
 
-            frame.Rolls.Add(points);
+            frame.SecondRoll = points;
             frame.IsFilled = true;
         }
         else
