@@ -22,6 +22,7 @@ builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 
 builder.Services.AddScoped<IBowlingManagerService, BowlingManagerService>();
+builder.Services.AddScoped<IScoreService, ScoreService>();
 
 var app = builder.Build();
 
