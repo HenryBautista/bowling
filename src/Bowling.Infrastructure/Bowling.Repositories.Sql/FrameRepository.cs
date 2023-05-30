@@ -44,6 +44,14 @@ public class FrameRepository : IFrameRepository
             frame.GameId == gameId && frame.FrameNumber == number).FirstOrDefaultAsync();
     }
 
+    public async Task<IList<Frame>> GetFramesByGameAsync(int gameId)
+    {
+        return await this.BowlingDbContext.Frames
+            .Where(frame => frame.GameId == gameId)
+            .OrderBy(frame => frame.FrameNumber)
+            .ToListAsync();
+    }
+
     public async Task UpdateAsync(Frame entity)
     {
         var frame = await this.BowlingDbContext.Frames.FindAsync(entity.Id);

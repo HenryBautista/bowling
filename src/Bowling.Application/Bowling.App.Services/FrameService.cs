@@ -143,5 +143,8 @@ public class FrameService : IFrameService
         return frame;
     }
 
-    
+    public async Task<IList<Frame>> GetFramesByGameAsync(int gameId)
+    {
+        return await this.FrameRepository.GetFramesByGameAsync(gameId);
+    }
 }

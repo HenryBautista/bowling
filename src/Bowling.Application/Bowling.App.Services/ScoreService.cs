@@ -17,7 +17,7 @@ public class ScoreService : IScoreService
     {
         var frames = await this
             .FrameService
-            .GetFramesByGame(gameId);
+            .GetFramesByGameAsync(gameId);
 
         int totalScore = 0;
         bool isPrevFrameStrike = false;
