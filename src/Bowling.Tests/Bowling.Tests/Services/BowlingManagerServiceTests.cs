@@ -13,15 +13,18 @@ public class BowlingManagerServiceTests
     private readonly BowlingManagerService Sut;
     private readonly IFrameService FrameService;
     private readonly IGameService GameService;
+    private readonly IScoreService ScoreService;
     private readonly Fixture Fixture;
 
     public BowlingManagerServiceTests()
     {
         this.FrameService = A.Fake<IFrameService>();
         this.GameService = A.Fake<IGameService>();
+        this.ScoreService = A.Fake<IScoreService>();
         this.Sut = new BowlingManagerService(
             this.FrameService,
-            this.GameService);
+            this.GameService,
+            this.ScoreService);
         this.Fixture = new Fixture();
     }
 
@@ -58,7 +61,7 @@ public class BowlingManagerServiceTests
             PinsDown = pinsDown
         };
 
-        var result = await this.Sut.Roll(rollDto);
+        var result = await this.Sut.RollAsync(rollDto);
 
         // Assert
         result.Should().NotBeNull();
@@ -98,16 +101,12 @@ public class BowlingManagerServiceTests
             this.GameService.GetGameAsync(gameId))
         .Returns(game);
 
-        var bowlingManagerService = new BowlingManagerService(
-            this.FrameService,
-            this.GameService);
-
         // Act
         var rollDto = new RollDto { 
             GameId = gameId,
             PinsDown = pinsDown };
         
-        var result = await bowlingManagerService.Roll(rollDto);
+        var result = await this.Sut.RollAsync(rollDto);
 
         // Assert
         result.Should().NotBeNull();
