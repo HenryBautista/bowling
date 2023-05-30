@@ -61,7 +61,7 @@ public class BowlingManagerService : IBowlingManagerService
         }
         
         //Check if all frames were filled
-        if(game.CurrentFrame >= 9 && currentFrame.IsFilled)
+        if(game.CurrentFrame >= 10 && currentFrame.IsFilled)
         {
             game.IsGameFinished = true;
             result.Message = "Game Finished!";
