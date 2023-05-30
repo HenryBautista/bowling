@@ -80,4 +80,46 @@ public class BowlingManagerServiceTests
                 pinsDown))
         .MustHaveHappenedOnceExactly();
     }
+
+    [Fact]
+    public async Task Roll_Should_Return_RollResultDto_With_GameAlreadyFinished_Message_When_GameIsFinished()
+    {
+        // Arrange
+        var gameId = 1;
+        var currentFrameNumber = 1;
+        var pinsDown = '5';
+        
+        var game = new Game {
+            Id = gameId,
+            CurrentFrame = currentFrameNumber,
+            IsGameFinished = true };
+        
+        A.CallTo(() => 
+            this.GameService.GetGameAsync(gameId))
+        .Returns(game);
+
+        var bowlingManagerService = new BowlingManagerService(
+            this.FrameService,
+            this.GameService);
+
+        // Act
+        var rollDto = new RollDto { 
+            GameId = gameId,
+            PinsDown = pinsDown };
+        
+        var result = await bowlingManagerService.Roll(rollDto);
+
+        // Assert
+        result.Should().NotBeNull();
+        result.GameId.Should().Be(gameId);
+        result.Message.Should().Be($"Game already finished check the Score for Game: {gameId}");
+
+        A.CallTo(() => 
+            this.GameService.GetGameAsync(gameId))
+        .MustHaveHappenedOnceExactly();
+
+        A.CallTo(() =>
+            this.FrameService.RollIntoFrameAsync(A<int>.Ignored, A<int>.Ignored, A<char>.Ignored))
+        .MustNotHaveHappened();
+    }
 }
