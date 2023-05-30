@@ -38,8 +38,18 @@ public class GameRepository : IGameRepository
         return await this.BowlingDbContext.Games.FindAsync(id);
     }
 
-    public Task UpdateAsync(Game entity)
+    public async Task UpdateAsync(Game entity)
     {
-        throw new NotImplementedException();
+        var game = await this.BowlingDbContext.Games.FindAsync(entity.Id);
+        
+        if (game == null)
+        {
+            throw new Exception("Not found");
+        }
+
+        game.CurrentFrame = entity.CurrentFrame;
+        game.IsGameFinished = entity.IsGameFinished;
+
+        await this.BowlingDbContext.SaveChangesAsync();
     }
 }

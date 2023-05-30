@@ -1,11 +1,13 @@
 namespace Bowling.Entities;
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 public class Frame
 {
     [Key]
     public int Id { get; set; }
-    public IEnumerable<int> Rolls { get; set; } = new List<int>();
+    public List<int> Rolls { get; set; } = new List<int>();
     public int Score { get; set; }
     public int GameId { get; set; }
     public bool IsFilled { get; set; } = false;

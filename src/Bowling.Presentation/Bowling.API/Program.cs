@@ -21,6 +21,8 @@ builder.Services.AddScoped<IFrameService, FrameService>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 
+builder.Services.AddScoped<IBowlingManagerService, BowlingManagerService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
