@@ -7,26 +7,32 @@ public class BowlingManagerService : IBowlingManagerService
 {
     private readonly IGameService GameService;
     private readonly IFrameService FrameService;
+    private readonly IScoreService ScoreService;
 
     public BowlingManagerService(
         IFrameService frameService,
-        IGameService gameService)
+        IGameService gameService,
+        IScoreService scoreService)
     {
         this.FrameService = frameService;
         this.GameService = gameService;
+        this.ScoreService = scoreService;
     }
 
-    public async Task<ScoreDto> GetScore(int gameId)
+    public async Task<ScoreDto> GetScoreAsync(int gameId)
     {
         //Get Game
         var game = await this.GameService.GetGameAsync(gameId);
+        
+        _ = game ?? throw new Exception("Game not found");
 
-        // TO-Do call to a Score Service, Send the GameId
+        //Call to a Score Service, Send the GameId
+        var resultScore = await this.ScoreService.GetScoreAsync(gameId);
 
-        return new ScoreDto();
+        return resultScore;
     }
 
-    public async Task<RollResultDto> Roll(RollDto roll)
+    public async Task<RollResultDto> RollAsync(RollDto roll)
     {
         //Get game
         var game = await this.GameService.GetGameAsync(roll.GameId);

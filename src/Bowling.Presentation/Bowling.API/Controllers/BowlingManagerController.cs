@@ -26,7 +26,7 @@ public class BowlingManagerController : ControllerBase
     {
         try
         {
-            var result = await this.BowlingManagerService.Roll(roll);
+            var result = await this.BowlingManagerService.RollAsync(roll);
             return Ok(result);
         }
         catch (Exception ex)
@@ -42,7 +42,7 @@ public class BowlingManagerController : ControllerBase
     {
         try
         {
-            var result = await this.BowlingManagerService.GetScore(gameId);
+            var result = await this.BowlingManagerService.GetScoreAsync(gameId);
             return Ok(result);
         }
         catch (Exception ex)
