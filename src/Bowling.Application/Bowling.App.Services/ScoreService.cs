@@ -25,7 +25,11 @@ public class ScoreService : IScoreService
 
         foreach (var frame in frames)
         {
-            var frameScore = CalculateFrameScore(frame, isPrevFrameStrike, isPrevFrameSpare);
+            var frameScore = CalculateFrameScore(
+                frame,
+                isPrevFrameStrike, 
+                isPrevFrameSpare);
+
             frame.Score = frameScore;
 
             totalScore += frameScore;
@@ -66,12 +70,12 @@ public class ScoreService : IScoreService
     
     private bool IsPreviousFrameStrike(
         int count,
-        List<int> rolls) => 
-    count > 0 && rolls[0] == BowlingConstants.MAX_FRAME_ROLL_VALUE;
+        List<int> rolls) => count > 0
+    && rolls[0] == BowlingConstants.MAX_FRAME_ROLL_VALUE;
 
     private bool IsPreviousFrameSpare(
         int count,
-        List<int> rolls)
-    => count > 1 && rolls[0] + rolls[1] == BowlingConstants.MAX_FRAME_ROLL_VALUE;
+        List<int> rolls) => count > 1 
+    && rolls[0] + rolls[1] == BowlingConstants.MAX_FRAME_ROLL_VALUE;
 
 }
