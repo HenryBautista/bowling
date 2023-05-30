@@ -26,7 +26,7 @@ public class FrameServiceTests
         // Arrange
         int gameId = 1;
         int currentFrameNumber = 1;
-        int pinsDown = 5;
+        char pinsDown = '5';
 
         Frame frame = null;
         A.CallTo(() => this.FakeFrameRepository.GetFrameByGameAndNumberAsync(
@@ -65,7 +65,7 @@ public class FrameServiceTests
         // Arrange
         int gameId = 1;
         int currentFrameNumber = 1;
-        int pinsDown = 5;
+        char pinsDown = '5';
 
         Frame frame = this.Fixture.Create<Frame>();
         A.CallTo(() => this.FakeFrameRepository.GetFrameByGameAndNumberAsync(
