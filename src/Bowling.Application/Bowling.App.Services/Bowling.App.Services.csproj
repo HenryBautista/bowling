@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bowling.Core\Bowling.Services\Bowling.Services.csproj" />
+    <ProjectReference Include="..\..\Bowling.Core\Bowling.Entities\Bowling.Entities.csproj" />
+    <ProjectReference Include="..\..\Bowling.Core\Bowling.Interfaces\Bowling.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+    <PackageReference Include="LanguageExt.Core" Version="4.4.3" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

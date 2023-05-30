@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Bowling.Infrastructure\Bowling.Repositories.Sql\Bowling.Repositories.Sql.csproj" />
     <ProjectReference Include="..\..\Bowling.Core\Bowling.Services\Bowling.Services.csproj" />
-    <ProjectReference Include="..\..\Bowling.App\Bowling.App.Services\Bowling.App.Services.csproj" />
+    <ProjectReference Include="..\..\Bowling.Application\Bowling.App.Services\Bowling.App.Services.csproj" />
   </ItemGroup>
 
 </Project>

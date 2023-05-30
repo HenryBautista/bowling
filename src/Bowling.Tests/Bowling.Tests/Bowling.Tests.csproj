@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Bowling.Core\Bowling.Interfaces\Bowling.Interfaces.csproj" />
-    <ProjectReference Include="..\..\Bowling.App\Bowling.App.Services\Bowling.App.Services.csproj" />
+    <ProjectReference Include="..\..\Bowling.Application\Bowling.App.Services\Bowling.App.Services.csproj" />
     <ProjectReference Include="..\..\Bowling.Core\Bowling.Entities\Bowling.Entities.csproj" />
   </ItemGroup>
 
