@@ -35,10 +35,11 @@ public class ScoreService : IScoreService
             totalScore += frameScore;
 
             isPrevFrameStrike = IsPreviousFrameStrike(
-                frame.FirstRoll);
+                frame.Rolls.Count,
+                frame.Rolls);
             isPrevFrameSpare = IsPreviousFrameSpare(
-                frame.FirstRoll,
-                frame.SecondRoll);
+                frame.Rolls.Count,
+                frame.Rolls);
         }
 
         return new ScoreDto 
@@ -53,28 +54,28 @@ public class ScoreService : IScoreService
         bool isPrevFrameStrike, 
         bool isPrevFrameSpare)
     {
-        int frameScore = 
-            frame.FirstRoll.Value + frame.SecondRoll.Value;
+        int frameScore = frame.Rolls.Sum();
 
         if (isPrevFrameStrike)
         {
-            frameScore += frameScore;
+            frameScore += frame.Rolls.Sum();
         }
         else if (isPrevFrameSpare)
         {
-            frameScore += frame.FirstRoll.Value;
+            frameScore += frame.Rolls[0];
         }
 
         return frameScore;
     }
     
     private bool IsPreviousFrameStrike(
-        int? firstRoll) => firstRoll != null
-    && firstRoll == BowlingConstants.MAX_FRAME_ROLL_VALUE;
+        int count,
+        IList<int> rolls) => count > 0
+    && rolls[0] == BowlingConstants.MAX_FRAME_ROLL_VALUE;
 
     private bool IsPreviousFrameSpare(
-        int? firstRoll,
-        int? secondRoll) => secondRoll != null 
-    && firstRoll + secondRoll == BowlingConstants.MAX_FRAME_ROLL_VALUE;
+        int count,
+        IList<int> rolls) => count > 1 
+    && rolls[0] + rolls[1] == BowlingConstants.MAX_FRAME_ROLL_VALUE;
 
 }
